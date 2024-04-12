@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+const notificationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, "Please provide a title"],
+  },
+  content: {
+    type: String,
+    required: [true, "Please provide a content"],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
+})
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -23,6 +38,7 @@ const userSchema = new mongoose.Schema({
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,
   verifyTokenExpiry: Date,
+  notifications: [notificationSchema]
 });
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
